@@ -1,5 +1,5 @@
 export default function handler(req, res) {
-    // Set CORS headers
+    // Set CORS headers needed 
     res.setHeader('Access-Control-Allow-Origin', '*'); // Allow all origins
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS'); // Allow GET and OPTIONS requests
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // Allow specific headers
