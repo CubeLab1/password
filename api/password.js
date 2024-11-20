@@ -37,3 +37,4 @@ export default function handler(req, res) {
     // Send the response
     res.status(200).json({ password });
 }
+
