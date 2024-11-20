@@ -1,5 +1,16 @@
 export default function handler(req, res) {
-    // Extract parameters from the query string
+    // Set CORS headers
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Allow all origins
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS'); // Allow GET and OPTIONS requests
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // Allow specific headers
+
+    // Handle preflight requests (CORS OPTIONS request)
+    if (req.method === 'OPTIONS') {
+        res.status(200).end(); // End preflight request
+        return;
+    }
+
+    // Extract query parameters
     const { length = 12, includeSymbols = true } = req.query;
 
     // Validate length parameter
@@ -23,6 +34,6 @@ export default function handler(req, res) {
         password += charset[randomIndex];
     }
 
-    // Respond with the generated password
+    // Send the response
     res.status(200).json({ password });
 }
