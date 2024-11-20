@@ -14,3 +14,10 @@ https://password-3ms3-3qto3q01d-robs-projects-d8826559.vercel.app/api/password
 
 Query Parameters:
 length (optional): Specifies the length of the password. Accepts values between 1 and 128. Defaults to 12 if not provided.
+
+Steps to Integrate:
+
+Copy the code above into an HTML file.
+Open the file in your browser.
+Click the "Generate Password" button to fetch a password from the API and display it.
+This script dynamically calls the API, retrieves the password, and displays it on your webpage. You can customize the length parameter in the API URL to meet your requirements.
