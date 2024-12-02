@@ -9,30 +9,60 @@
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #444;
         }
         input, button {
             padding: 10px;
             margin: 5px;
             font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        input {
+            width: 80px;
+        }
+        button {
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+        }
+        button:hover {
+            background-color: #0056b3;
         }
         p {
             margin-top: 20px;
             font-size: 18px;
-            color: #333;
+            color: #444;
+            word-wrap: break-word;
+        }
+        .error {
+            color: red;
         }
     </style>
 </head>
 <body>
     <h1>Password Generator</h1>
-    <label for="length">Password Length:</label>
-    <input type="number" id="length" min="1" max="128" value="12">
+    <label for="length">Password Length (3-20):</label>
+    <input type="number" id="length" min="3" max="20" value="12">
     <button id="generate">Generate Password</button>
     <p id="password">Your password will appear here.</p>
 
     <script>
         document.getElementById('generate').addEventListener('click', () => {
             // Get the desired length from the input field
-            const length = document.getElementById('length').value || 12;
+            const length = document.getElementById('length').value;
+
+            // Validate input
+            if (!length || length < 3 || length > 20) {
+                document.getElementById('password').textContent = "Please enter a valid length between 3 and 20.";
+                document.getElementById('password').className = "error";
+                return;
+            }
 
             // Construct the API URL with the length parameter
             const apiUrl = `https://password-3ms3-3qto3q01d-robs-projects-d8826559.vercel.app/api/password?length=${length}`;
@@ -48,13 +78,16 @@
                 .then(data => {
                     // Display the generated password
                     document.getElementById('password').textContent = `Generated Password: ${data.password}`;
+                    document.getElementById('password').className = ""; // Reset error class
                 })
                 .catch(error => {
                     // Handle errors
                     console.error('Error:', error);
                     document.getElementById('password').textContent = 'Error generating password. Please try again.';
+                    document.getElementById('password').className = "error";
                 });
         });
     </script>
 </body>
 </html>
+
